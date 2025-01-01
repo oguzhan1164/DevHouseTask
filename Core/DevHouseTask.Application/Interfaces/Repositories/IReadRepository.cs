@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DevHouseTask.Application
+namespace DevHouseTask.Application.Interfaces.Repositories
 {
     public interface IReadRepository<T> where T : class, IEntityBase, new()
     {

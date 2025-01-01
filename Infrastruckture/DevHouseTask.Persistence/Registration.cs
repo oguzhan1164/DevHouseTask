@@ -1,4 +1,4 @@
-﻿using DevHouseTask.Application;
+﻿using DevHouseTask.Application.Interfaces.Repositories;
 using DevHouseTask.Persistence.Context;
 using DevHouseTask.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +20,7 @@ namespace DevHouseTask.Persistence
             opt.UseMySQL(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+            services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DevHouseTask.Application;
+﻿using DevHouseTask.Application.Interfaces.Repositories;
 using DevHouseTask.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
