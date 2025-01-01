@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DevHouseTask.Application\DevHouseTask.Application.csproj" />
     <ProjectReference Include="..\..\Core\DevHouseTask.Domain\DevHouseTask.Domain.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,6 @@
-﻿using DevHouseTask.Persistence.Context;
+﻿using DevHouseTask.Application;
+using DevHouseTask.Persistence.Context;
+using DevHouseTask.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ namespace DevHouseTask.Persistence
         {
             services.AddDbContext<AppDbContext>(opt => 
             opt.UseMySQL(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
         }
     }
 }
