@@ -3,6 +3,7 @@ using DevHouseTask.Persistence;
 using DevHouseTask.Infrastruckture;
 using DevHouseTask.Mapper;
 using Microsoft.OpenApi.Models;
+using DevHouseTask.Application.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,7 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.ConfigureExceptionHandlingMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();
