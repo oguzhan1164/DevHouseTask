@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\DevHouseTask.Mapper\DevHouseTask.Mapper.csproj" />
+    <ProjectReference Include="..\..\Infrastruckture\DevHouseTask.Infrastruckture\DevHouseTask.Infrastruckture.csproj" />
     <ProjectReference Include="..\..\Infrastruckture\DevHouseTask.Persistence\DevHouseTask.Persistence.csproj" />
   </ItemGroup>
 

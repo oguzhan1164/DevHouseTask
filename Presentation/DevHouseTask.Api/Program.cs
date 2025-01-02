@@ -1,5 +1,6 @@
 using DevHouseTask.Application;
 using DevHouseTask.Persistence;
+using DevHouseTask.Infrastruckture;
 using DevHouseTask.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddInfrastruckture(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddCustomMapper();
 
