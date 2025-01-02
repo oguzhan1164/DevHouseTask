@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevHouseTask.Persistence", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevHouseTask.Api", "Presentation\DevHouseTask.Api\DevHouseTask.Api.csproj", "{AD1FD48D-0D52-480F-B816-0175A6F16010}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevHouseTask.Mapper", "Core\DevHouseTask.Mapper\DevHouseTask.Mapper.csproj", "{6A43E375-EFA4-48E5-A22B-935D1590F581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{AD1FD48D-0D52-480F-B816-0175A6F16010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD1FD48D-0D52-480F-B816-0175A6F16010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD1FD48D-0D52-480F-B816-0175A6F16010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A43E375-EFA4-48E5-A22B-935D1590F581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A43E375-EFA4-48E5-A22B-935D1590F581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A43E375-EFA4-48E5-A22B-935D1590F581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A43E375-EFA4-48E5-A22B-935D1590F581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +61,6 @@ Global
 		{8BDE2424-9F4B-442F-AEFB-26B47B3EDD22} = {2A987CDE-E027-4A17-A54C-A5B462F6292A}
 		{31FE4EA6-0971-4F82-81DA-61E47A966121} = {2A987CDE-E027-4A17-A54C-A5B462F6292A}
 		{AD1FD48D-0D52-480F-B816-0175A6F16010} = {0F03542F-E658-4568-AC48-77CA7E9B4327}
+		{6A43E375-EFA4-48E5-A22B-935D1590F581} = {0C51F809-9A39-466F-B57B-B34078E20AF4}
 	EndGlobalSection
 EndGlobal

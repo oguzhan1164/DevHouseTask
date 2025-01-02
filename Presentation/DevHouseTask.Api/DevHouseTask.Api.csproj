@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\DevHouseTask.Mapper\DevHouseTask.Mapper.csproj" />
     <ProjectReference Include="..\..\Infrastruckture\DevHouseTask.Persistence\DevHouseTask.Persistence.csproj" />
   </ItemGroup>
 

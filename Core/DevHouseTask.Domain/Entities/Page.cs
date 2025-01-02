@@ -18,6 +18,6 @@ namespace DevHouseTask.Domain.Entities
                 Code = code;
         }
         public string  Code{ get; set; }
-        public ICollection<PermissionDetail> PermissionDetail{ get; set; }
+        public ICollection<PermissionDetail> PermissionDetail{ get; set; } //ihtiyacım yok
     }
 }
