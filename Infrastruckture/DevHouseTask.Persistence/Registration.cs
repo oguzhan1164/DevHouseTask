@@ -1,5 +1,6 @@
 ﻿using DevHouseTask.Application.Interfaces.Repositories;
 using DevHouseTask.Application.UnitOfWorks;
+using DevHouseTask.Domain.Entities;
 using DevHouseTask.Persistence.Context;
 using DevHouseTask.Persistence.Repositories;
 using DevHouseTask.Persistence.UnitOfWorks;
@@ -29,6 +30,17 @@ namespace DevHouseTask.Persistence
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddIdentityCore<Auth>(opt =>
+            {
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 2;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddRoles<Role>().AddEntityFrameworkStores<AppDbContext>();
         }
     }
 }
