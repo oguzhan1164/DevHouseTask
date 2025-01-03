@@ -1,5 +1,7 @@
-﻿using DevHouseTask.Application.Beheviors;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Beheviors;
 using DevHouseTask.Application.Exceptions;
+using DevHouseTask.Application.Features.Pages.Rules;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,10 +23,19 @@ namespace DevHouseTask.Application
 
             services.AddValidatorsFromAssembly(assembly);
 
-            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr-tr");
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr");
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehevior<,>));
 
+            services.AddRulesForAssemblyContaining(assembly,typeof(BaseRules));
+
+        }
+        private static IServiceCollection AddRulesForAssemblyContaining(this IServiceCollection services,Assembly assembly, Type type)
+        {
+            var types = assembly.GetTypes().Where(t=>t.IsSubclassOf(type) && type !=t).ToList();
+            foreach (var item in types)
+                services.AddTransient(item);
+            return services;
         }
     }
 }
