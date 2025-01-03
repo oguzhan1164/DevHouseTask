@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Users.Commands.DeleteUsers
 {
-    public class DeleteUsersCommandHandler : IRequestHandler<DeleteUsersCommandRequest>
+    public class DeleteUsersCommandHandler : IRequestHandler<DeleteUsersCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -17,12 +17,14 @@ namespace DevHouseTask.Application.Features.Users.Commands.DeleteUsers
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(DeleteUsersCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteUsersCommandRequest request, CancellationToken cancellationToken)
         {
             var user = await unitOfWork.GetReadRepository<User>().GetAsync(x => x.Id == request.Id);
 
             await unitOfWork.GetWriteRepository<User>().DeleteAsync(user);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

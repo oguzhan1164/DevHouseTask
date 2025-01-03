@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.DeletePermissions
 {
-    public class DeletePermissionsCommandRequest : IRequest
+    public class DeletePermissionsCommandRequest : IRequest<Unit>
     {
         public int Id { get; set; }
     }

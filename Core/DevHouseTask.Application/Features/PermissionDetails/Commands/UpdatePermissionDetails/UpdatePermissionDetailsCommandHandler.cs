@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.PermissionDetails.Commands.UpdatePermissionDetails
 {
-    public class UpdatePermissionDetailsCommandHandler : IRequestHandler<UpdatePermissionDetailsCommandRequest>
+    public class UpdatePermissionDetailsCommandHandler : IRequestHandler<UpdatePermissionDetailsCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -21,7 +21,7 @@ namespace DevHouseTask.Application.Features.PermissionDetails.Commands.UpdatePer
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task Handle(UpdatePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdatePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
         {
             var permissionDetails = unitOfWork.GetReadRepository<PermissionDetail>().Find(x => x.Id == request.Id);
 
@@ -29,6 +29,8 @@ namespace DevHouseTask.Application.Features.PermissionDetails.Commands.UpdatePer
 
             await unitOfWork.GetWriteRepository<PermissionDetail>().UpdateAsync(map);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

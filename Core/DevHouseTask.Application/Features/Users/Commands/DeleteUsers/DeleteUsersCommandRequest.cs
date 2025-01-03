@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Users.Commands.DeleteUsers
 {
-    public class DeleteUsersCommandRequest : IRequest
+    public class DeleteUsersCommandRequest : IRequest<Unit>
     {
         public int Id { get; set; }
     }

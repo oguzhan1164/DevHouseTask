@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.PermissionDetails.Commands.DeletePermissionDetails
 {
-    public class DeletePermissionDetailsCommandHandler : IRequestHandler<DeletePermissionDetailsCommandRequest>
+    public class DeletePermissionDetailsCommandHandler : IRequestHandler<DeletePermissionDetailsCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -17,12 +17,14 @@ namespace DevHouseTask.Application.Features.PermissionDetails.Commands.DeletePer
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(DeletePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeletePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
         {
             var permissionDetail = await unitOfWork.GetReadRepository<PermissionDetail>().GetAsync(x => x.Id == request.Id);
 
             await unitOfWork.GetWriteRepository<PermissionDetail>().DeleteAsync(permissionDetail);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

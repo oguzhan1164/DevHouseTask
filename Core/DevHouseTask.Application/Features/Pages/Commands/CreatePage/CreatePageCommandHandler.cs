@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
 {
-    public class CreatePageCommandHandler : IRequestHandler<CreatePageCommandRequest>
+    public class CreatePageCommandHandler : IRequestHandler<CreatePageCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -17,13 +17,13 @@ namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(CreatePageCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreatePageCommandRequest request, CancellationToken cancellationToken)
         {
             Page page = new(request.Code);
             await unitOfWork.GetWriteRepository<Page>().AddAsync(page);
             await unitOfWork.SaveAsync();
 
-
+            return Unit.Value;
         }
     }
 }

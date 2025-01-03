@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.DeletePage
 {
-    public class DeletePageCommandRequest : IRequest
+    public class DeletePageCommandRequest : IRequest<Unit>
     {
         public int Id{ get; set; }
     }

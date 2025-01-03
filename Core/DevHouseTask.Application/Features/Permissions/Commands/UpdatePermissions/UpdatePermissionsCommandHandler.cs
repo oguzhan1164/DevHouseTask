@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.UpdatePermissions
 {
-    public class UpdatePermissionsCommandHandler : IRequestHandler<UpdatePermissionsCommandRequest>
+    public class UpdatePermissionsCommandHandler : IRequestHandler<UpdatePermissionsCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
@@ -20,7 +20,7 @@ namespace DevHouseTask.Application.Features.Permissions.Commands.UpdatePermissio
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
         }
-        public async Task Handle(UpdatePermissionsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdatePermissionsCommandRequest request, CancellationToken cancellationToken)
         {
             var permission = unitOfWork.GetReadRepository<Permission>().Find(x => x.Id == request.Id);
 
@@ -28,6 +28,8 @@ namespace DevHouseTask.Application.Features.Permissions.Commands.UpdatePermissio
 
             await unitOfWork.GetWriteRepository<Permission>().UpdateAsync(map);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

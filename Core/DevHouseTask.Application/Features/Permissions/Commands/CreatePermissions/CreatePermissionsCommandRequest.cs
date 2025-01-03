@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.CreatePermissions
 {
-    public class CreatePermissionsCommandRequest :IRequest
+    public class CreatePermissionsCommandRequest :IRequest<Unit>
     {
         public string Name { get; set; }
     }

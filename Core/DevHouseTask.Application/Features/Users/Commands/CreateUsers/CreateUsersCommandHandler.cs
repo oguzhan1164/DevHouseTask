@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Users.Commands.CreateUsers
 {
-    public class CreateUsersCommandHandler : IRequestHandler<CreateUsersCommandRequest>
+    public class CreateUsersCommandHandler : IRequestHandler<CreateUsersCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -17,11 +17,13 @@ namespace DevHouseTask.Application.Features.Users.Commands.CreateUsers
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(CreateUsersCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateUsersCommandRequest request, CancellationToken cancellationToken)
         {
             User users = new User(request.UserName,request.Password,request.IsAdmin, request.PermissionId);
             await unitOfWork.GetWriteRepository<User>().AddAsync(users);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.PermissionDetails.Commands.CreatePermissionDetails
 {
-    public class CreatePermissionDetailsCommandHandler : IRequestHandler<CreatePermissionDetailsCommandRequest>
+    public class CreatePermissionDetailsCommandHandler : IRequestHandler<CreatePermissionDetailsCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
         public CreatePermissionDetailsCommandHandler(IUnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(CreatePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreatePermissionDetailsCommandRequest request, CancellationToken cancellationToken)
         {
             PermissionDetail permissionDetail = new PermissionDetail(request.PageId,request.PermissionId,request.CanDelete, request.CanCreate, request.CanUpdate, request.CanList);
             await unitOfWork.GetWriteRepository<PermissionDetail>().AddAsync(permissionDetail);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

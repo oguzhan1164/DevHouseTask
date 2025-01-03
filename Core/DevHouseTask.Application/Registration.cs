@@ -1,12 +1,11 @@
-﻿using DevHouseTask.Application.Exceptions;
+﻿using DevHouseTask.Application.Beheviors;
+using DevHouseTask.Application.Exceptions;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DevHouseTask.Application
 {
@@ -18,7 +17,14 @@ namespace DevHouseTask.Application
 
             services.AddTransient<ExceptionMiddleware>();
 
-            services.AddMediatR(cfg=> cfg.RegisterServicesFromAssemblies(assembly));
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
+
+            services.AddValidatorsFromAssembly(assembly);
+
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("tr-tr");
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehevior<,>));
+
         }
     }
 }

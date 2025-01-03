@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.PermissionDetails.Commands.CreatePermissionDetails
 {
-    public class CreatePermissionDetailsCommandRequest : IRequest
+    public class CreatePermissionDetailsCommandRequest : IRequest<Unit>
     {
         public int PermissionId { get; set; }
         public int PageId { get; set; }

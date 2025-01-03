@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.DeletePage
 {
-    public class DeletePageCommandHandler : IRequestHandler<DeletePageCommandRequest>
+    public class DeletePageCommandHandler : IRequestHandler<DeletePageCommandRequest,Unit>
     {
         private readonly IUnitOfWork unitOfWork;
 
@@ -17,12 +17,14 @@ namespace DevHouseTask.Application.Features.Pages.Commands.DeletePage
         {
             this.unitOfWork = unitOfWork;
         }
-        public async Task Handle(DeletePageCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeletePageCommandRequest request, CancellationToken cancellationToken)
         {
             var page = await unitOfWork.GetReadRepository<Page>().GetAsync(x=>x.Id == request.Id);
 
             await unitOfWork.GetWriteRepository<Page>().DeleteAsync(page);
             await unitOfWork.SaveAsync();
+
+            return Unit.Value;
         }
     }
 }

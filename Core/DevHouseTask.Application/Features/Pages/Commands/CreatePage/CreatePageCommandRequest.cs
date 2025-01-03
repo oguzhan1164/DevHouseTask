@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
 {
-    public class CreatePageCommandRequest : IRequest
+    public class CreatePageCommandRequest : IRequest<Unit>
     {
         public string Code { get; set; }
     }

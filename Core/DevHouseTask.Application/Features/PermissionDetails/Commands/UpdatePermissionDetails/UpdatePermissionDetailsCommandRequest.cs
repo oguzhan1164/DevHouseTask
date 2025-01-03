@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.PermissionDetails.Commands.UpdatePermissionDetails
 {
-    public class UpdatePermissionDetailsCommandRequest : IRequest
+    public class UpdatePermissionDetailsCommandRequest : IRequest<Unit>
     {
         public int Id{ get; set; }
         public int PermissionId { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.UpdatePage
 {
-    public class UpdatePageCommandRequest : IRequest
+    public class UpdatePageCommandRequest : IRequest<Unit>
     {
         public int Id { get; set; }
         public string Code{ get; set; }

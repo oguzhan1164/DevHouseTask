@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Users.Commands.CreateUsers
 {
-    public class CreateUsersCommandRequest :IRequest
+    public class CreateUsersCommandRequest :IRequest<Unit>
     {
         public string UserName { get; set; }
         public string Password { get; set; }
