@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Auth.Exceptions
 {
-    public class UserAlreadyExistException : BaseExceptions
+    public class UsersNameOrPasswordShouldNotBeInvalidException : BaseExceptions
     {
-        public UserAlreadyExistException() : base("Böyle bir kullanıcı zaten var") { }
-        
+        public UsersNameOrPasswordShouldNotBeInvalidException() : base("Kullanıcı Adı veya şifre yanlıştır.") { }
     }
 }

@@ -15,5 +15,10 @@ namespace DevHouseTask.Application.Features.Auth.Rules
             if (user is not null) throw new UserAlreadyExistException();
             return Task.CompletedTask;
         }
+        public Task UserNameOrPasswordShouldNotBeInvalid(DevHouseTask.Domain.Entities.Auth user,bool checkPassword)
+        {
+            if (user is  null || !checkPassword) throw new UserNameOrPasswordShouldNotBeInvalidException();
+            return Task.CompletedTask;
+        }
     }
 }

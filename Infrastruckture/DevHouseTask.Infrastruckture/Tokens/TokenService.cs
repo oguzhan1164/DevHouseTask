@@ -24,7 +24,7 @@ namespace DevHouseTask.Infrastruckture.Tokens
             this.userManager = userManager;
             tokenSettings = options.Value;
         }
-        public async Task<JwtSecurityToken> CreateToken(Auth user, IList<Role> roles)
+        public async Task<JwtSecurityToken> CreateToken(Auth user, IList<string> roles)
         {
             var claims = new List<Claim>()
             {
@@ -47,7 +47,40 @@ namespace DevHouseTask.Infrastruckture.Tokens
 
             await userManager.AddClaimsAsync(user,claims);
 
+
+
             return token;
         }
+
+       public async Task<JwtSecurityToken> CreateUserToken(User user, IList<string> permissions)
+       {
+           var claims = new List<Claim>()
+           {
+               new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+               new Claim(JwtRegisteredClaimNames.Jti,user.Id.ToString())
+           };
+            //Role role = new Role();
+            //role.Name=permissions.Select(x=>x.Name).First();
+            //role.PermissionDetail = permissions.First().PermissionDetail;
+            //role.Id = permissions.First().Id;
+           foreach (var permission in permissions)
+           {
+               claims.Add(new Claim(ClaimTypes.Role, permission.ToString()));
+           }
+           var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.Secret));
+
+           var token = new JwtSecurityToken(
+               issuer: tokenSettings.Issuer,
+               audience: tokenSettings.Audience,
+               claims: claims,
+               signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+               );
+            Auth auth = new Auth();
+            auth.Id=user.Id;
+           await userManager.AddClaimsAsync(auth, claims);
+
+            return token;
+
+       }
     }
 }

@@ -11,6 +11,8 @@ namespace DevHouseTask.Application.Interfaces.Tokens
 {
     public interface ITokenService
     {
-        Task<JwtSecurityToken> CreateToken(Auth user, IList<Role> roles);
+        Task<JwtSecurityToken> CreateToken(Auth user, IList<string> roles);
+
+        Task<JwtSecurityToken> CreateUserToken(User user, IList<string> roles);
     }
 }

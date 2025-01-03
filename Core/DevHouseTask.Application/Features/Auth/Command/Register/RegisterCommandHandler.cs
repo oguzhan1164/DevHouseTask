@@ -41,6 +41,7 @@ namespace DevHouseTask.Application.Features.Auth.Command.Register
                         Name = "user",
                         NormalizedName = "USER"
                     });
+                await userManager.CreateAsync(user, request.Password);
                 await userManager.AddToRoleAsync(user, "user");
 
                 User users = new User(request.UserName, request.Password, false, 3);

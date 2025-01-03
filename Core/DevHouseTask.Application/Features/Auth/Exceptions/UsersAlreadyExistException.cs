@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Auth.Exceptions
 {
-    public class UserAlreadyExistException : BaseExceptions
+    public class UsersAlreadyExistException : BaseExceptions
     {
-        public UserAlreadyExistException() : base("Böyle bir kullanıcı zaten var") { }
-        
+        public UsersAlreadyExistException() : base("Böyle bir kullanıcı zaten var") { }
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Auth.Command.Login
 {
-    internal class LoginCommandResponse
+    public class LoginCommandResponse
     {
+        public string Token { get; set; }
     }
 }

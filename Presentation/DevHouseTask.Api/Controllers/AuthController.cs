@@ -1,4 +1,5 @@
-﻿using DevHouseTask.Application.Features.Auth.Command.Register;
+﻿using DevHouseTask.Application.Features.Auth.Command.Login;
+using DevHouseTask.Application.Features.Auth.Command.Register;
 using MediatR;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,13 @@ namespace DevHouseTask.Api.Controllers
         {
             await mediator.Send(request);
             return StatusCode(StatusCodes.Status201Created);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCommandRequest request)
+        {
+            var response = await mediator.Send(request);
+            
+            return StatusCode(StatusCodes.Status200OK,response);
         }
     }
 }

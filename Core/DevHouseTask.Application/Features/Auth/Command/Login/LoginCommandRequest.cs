@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace DevHouseTask.Application.Features.Auth.Command.Login
 {
-    internal class LoginCommandRequest
+    public class LoginCommandRequest : IRequest<LoginCommandResponse>
     {
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 }
