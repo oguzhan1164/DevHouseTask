@@ -1,7 +1,10 @@
-﻿using DevHouseTask.Application.Features.Pages.Rules;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Features.Pages.Rules;
+using DevHouseTask.Application.Interfaces.AutoMapper;
 using DevHouseTask.Application.UnitOfWorks;
 using DevHouseTask.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +13,15 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
 {
-    public class CreatePageCommandHandler : IRequestHandler<CreatePageCommandRequest,Unit>
+    public class CreatePageCommandHandler :BaseHandler, IRequestHandler<CreatePageCommandRequest,Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
         private readonly PageRules pageRules;
 
-        public CreatePageCommandHandler(IUnitOfWork unitOfWork,PageRules pageRules)
+        public CreatePageCommandHandler(PageRules pageRules,IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
             this.pageRules = pageRules;
         }
+
         public async Task<Unit> Handle(CreatePageCommandRequest request, CancellationToken cancellationToken)
         {
             IList<Page> pages = await unitOfWork.GetReadRepository<Page>().GetAllAsync();

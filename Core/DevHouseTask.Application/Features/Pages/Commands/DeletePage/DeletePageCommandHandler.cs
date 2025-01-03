@@ -1,6 +1,9 @@
-﻿using DevHouseTask.Application.UnitOfWorks;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Interfaces.AutoMapper;
+using DevHouseTask.Application.UnitOfWorks;
 using DevHouseTask.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +12,12 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Pages.Commands.DeletePage
 {
-    public class DeletePageCommandHandler : IRequestHandler<DeletePageCommandRequest,Unit>
+    public class DeletePageCommandHandler :BaseHandler, IRequestHandler<DeletePageCommandRequest,Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-
-        public DeletePageCommandHandler(IUnitOfWork unitOfWork)
+        public DeletePageCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
         }
+
         public async Task<Unit> Handle(DeletePageCommandRequest request, CancellationToken cancellationToken)
         {
             var page = await unitOfWork.GetReadRepository<Page>().GetAsync(x=>x.Id == request.Id);

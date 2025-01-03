@@ -1,17 +1,19 @@
-﻿using DevHouseTask.Application.UnitOfWorks;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Interfaces.AutoMapper;
+using DevHouseTask.Application.UnitOfWorks;
 using DevHouseTask.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.DeletePermissions
 {
-    public class DeletePermissionsCommandHandler : IRequestHandler<DeletePermissionsCommandRequest,Unit>
+    public class DeletePermissionsCommandHandler : BaseHandler, IRequestHandler<DeletePermissionsCommandRequest, Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-        public DeletePermissionsCommandHandler(IUnitOfWork unitOfWork)
+        public DeletePermissionsCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
         }
+
         public async Task<Unit> Handle(DeletePermissionsCommandRequest request, CancellationToken cancellationToken)
         {
             var permission = await unitOfWork.GetReadRepository<Permission>().GetAsync(x => x.Id == request.Id);

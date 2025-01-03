@@ -26,6 +26,11 @@ namespace DevHouseTask.Persistence.Context
                 optionsBuilder.UseMySQL("Server=localhost;Database=DevHouseTaskDb;User=root;Password=ergin123;Port=3307;");
             }
         }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    base.OnModelCreating(builder);
+        //    builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        //}
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Page> Pages{ get; set; }
         public DbSet<PermissionDetail> PermissionDetails{ get; set; }

@@ -1,8 +1,10 @@
-﻿using DevHouseTask.Application.Features.Pages.Commands.UpdatePage;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Features.Pages.Commands.UpdatePage;
 using DevHouseTask.Application.Interfaces.AutoMapper;
 using DevHouseTask.Application.UnitOfWorks;
 using DevHouseTask.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +13,12 @@ using System.Threading.Tasks;
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.UpdatePermissions
 {
-    public class UpdatePermissionsCommandHandler : IRequestHandler<UpdatePermissionsCommandRequest,Unit>
+    public class UpdatePermissionsCommandHandler : BaseHandler, IRequestHandler<UpdatePermissionsCommandRequest, Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
-        public UpdatePermissionsCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public UpdatePermissionsCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
         }
+
         public async Task<Unit> Handle(UpdatePermissionsCommandRequest request, CancellationToken cancellationToken)
         {
             var permission = unitOfWork.GetReadRepository<Permission>().Find(x => x.Id == request.Id);

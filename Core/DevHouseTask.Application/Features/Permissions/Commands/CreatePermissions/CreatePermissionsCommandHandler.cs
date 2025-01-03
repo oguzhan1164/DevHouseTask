@@ -1,16 +1,18 @@
-﻿using DevHouseTask.Application.UnitOfWorks;
+﻿using DevHouseTask.Application.Bases;
+using DevHouseTask.Application.Interfaces.AutoMapper;
+using DevHouseTask.Application.UnitOfWorks;
 using DevHouseTask.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace DevHouseTask.Application.Features.Permissions.Commands.CreatePermissions
 {
-    public class CreatePermissionsCommandHandler : IRequestHandler<CreatePermissionsCommandRequest,Unit>
+    public class CreatePermissionsCommandHandler : BaseHandler, IRequestHandler<CreatePermissionsCommandRequest,Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-        public CreatePermissionsCommandHandler(IUnitOfWork unitOfWork)
+        public CreatePermissionsCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
         {
-            this.unitOfWork = unitOfWork;
         }
+
         public async Task<Unit> Handle(CreatePermissionsCommandRequest request, CancellationToken cancellationToken)
         {
             Permission permission = new(request.Name);

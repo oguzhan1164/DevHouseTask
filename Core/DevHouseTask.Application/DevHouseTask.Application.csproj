@@ -20,9 +20,4 @@
     <ProjectReference Include="..\DevHouseTask.Domain\DevHouseTask.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Auth\Exceptions\" />
-    <Folder Include="Features\Auth\Rules\" />
-  </ItemGroup>
-
 </Project>
