@@ -28,8 +28,22 @@ namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
             IList<Page> pages = await unitOfWork.GetReadRepository<Page>().GetAllAsync();
 
             var userClaims=httpContextAccessor.HttpContext.User.Claims;
+            var userIdClaim = userClaims.FirstOrDefault(c => c.Type == "sub" || c.Type == "userId");
+            var userId = int.Parse(userIdClaim.Value);
+            var user =unitOfWork.GetReadRepository<User>().Find(x=>x.Id==userId);
+
             var roleClaims = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
-            
+            var roleNameClaim = userClaims.FirstOrDefault(c => c.Type == "role" || c.Type == "roles");
+            var permissionName = roleNameClaim.ToString();
+            var role = unitOfWork.GetReadRepository<Permission>().Find(x => x.Name == permissionName);
+            var permissionDetail = unitOfWork.GetReadRepository<PermissionDetail>().Find(x=>x.PermissionId == role.Select(x=>x.Id).First());
+            if (user.Select(x => x.IsAdmin).FirstOrDefault()==false)
+            {
+                if (permissionDetail.Select(x=>x.CanCreate).FirstOrDefault()==false)
+                {
+                    throw new Exception("Yetkisiz işlem.");
+                }
+            }
 
             await pageRules.PageCodeMustNotBeSame(pages,request.Code);
 
