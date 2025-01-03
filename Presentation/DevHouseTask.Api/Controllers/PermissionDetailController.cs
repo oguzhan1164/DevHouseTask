@@ -4,6 +4,7 @@ using DevHouseTask.Application.Features.PermissionDetails.Commands.DeletePermiss
 using DevHouseTask.Application.Features.PermissionDetails.Commands.UpdatePermissionDetails;
 using DevHouseTask.Application.Features.PermissionDetails.Queries.GetAllPermissionDetails;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevHouseTask.Api.Controllers
@@ -18,6 +19,7 @@ namespace DevHouseTask.Api.Controllers
             this.mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllPermissionDetails()
         {
             var response = await mediator.Send(new GetAllPermissionDetailsQueryRequest());
@@ -25,6 +27,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok(response);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreatePermissionDetail(CreatePermissionDetailsCommandRequest request)
         {
             await mediator.Send(request);
@@ -32,6 +35,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdatePermissionDetail(UpdatePermissionDetailsCommandRequest request)
         {
             await mediator.Send(request);
@@ -39,6 +43,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeletePermissionDetail(DeletePermissionDetailsCommandRequest request)
         {
             await mediator.Send(request);

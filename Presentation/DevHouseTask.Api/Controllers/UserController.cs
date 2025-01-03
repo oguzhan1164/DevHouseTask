@@ -3,6 +3,7 @@ using DevHouseTask.Application.Features.Users.Commands.DeleteUsers;
 using DevHouseTask.Application.Features.Users.Commands.UpdateUsers;
 using DevHouseTask.Application.Features.Users.Queries.GetAllUsers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevHouseTask.Api.Controllers
@@ -17,6 +18,7 @@ namespace DevHouseTask.Api.Controllers
             this.mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllUsers()
         {
             var response = await mediator.Send(new GetAllUsersQueryRequest());
@@ -24,6 +26,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok(response);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateUser(CreateUsersCommandRequest request)
         {
             await mediator.Send(request);
@@ -31,6 +34,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateUser(UpdateUsersCommandRequest request)
         {
             await mediator.Send(request);
@@ -38,6 +42,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(DeleteUsersCommandRequest request)
         {
             await mediator.Send(request);

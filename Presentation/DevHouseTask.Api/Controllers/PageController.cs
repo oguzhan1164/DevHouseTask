@@ -3,6 +3,7 @@ using DevHouseTask.Application.Features.Pages.Commands.DeletePage;
 using DevHouseTask.Application.Features.Pages.Commands.UpdatePage;
 using DevHouseTask.Application.Features.Pages.Queries.GetAllPages;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevHouseTask.Api.Controllers
@@ -18,6 +19,7 @@ namespace DevHouseTask.Api.Controllers
             this.mediator = mediator;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllPages() 
         {
             var response = await mediator.Send(new GetAllPagesQueryRequest());
@@ -26,6 +28,7 @@ namespace DevHouseTask.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreatePage(CreatePageCommandRequest request)
         {
             await mediator.Send(request);
@@ -33,6 +36,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdatePage(UpdatePageCommandRequest request)
         {
             await mediator.Send(request);
@@ -40,6 +44,7 @@ namespace DevHouseTask.Api.Controllers
             return Ok();
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeletePage(DeletePageCommandRequest request)
         {
             await mediator.Send(request);

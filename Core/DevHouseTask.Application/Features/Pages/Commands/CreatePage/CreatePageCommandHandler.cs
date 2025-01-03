@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,10 @@ namespace DevHouseTask.Application.Features.Pages.Commands.CreatePage
         public async Task<Unit> Handle(CreatePageCommandRequest request, CancellationToken cancellationToken)
         {
             IList<Page> pages = await unitOfWork.GetReadRepository<Page>().GetAllAsync();
+
+            var userClaims=httpContextAccessor.HttpContext.User.Claims;
+            var roleClaims = userClaims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+            
 
             await pageRules.PageCodeMustNotBeSame(pages,request.Code);
 

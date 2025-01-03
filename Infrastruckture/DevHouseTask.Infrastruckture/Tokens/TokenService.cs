@@ -28,7 +28,7 @@ namespace DevHouseTask.Infrastruckture.Tokens
         {
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+                new Claim(ClaimTypes.Sid,user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti,user.Id.ToString())
             };
             foreach (var role in roles) 
@@ -56,7 +56,7 @@ namespace DevHouseTask.Infrastruckture.Tokens
        {
            var claims = new List<Claim>()
            {
-               new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
+               new Claim(ClaimTypes.Sid,user.Id.ToString()),
                new Claim(JwtRegisteredClaimNames.Jti,user.Id.ToString())
            };
             //Role role = new Role();
